@@ -87,13 +87,9 @@ def solution(scoville, k):
             return -1
         value = 0
         firstVal = deleteHeap(scoville)
-        print(scoville, firstVal)
         secondVal = deleteHeap(scoville)
-        print(scoville, secondVal)
-        value = firstVal + (secondVal * secondVal)
+        value = firstVal + (secondVal * 2)
         addHeap(scoville, value)
-        print(scoville)
         count += 1
     return count
-
 print(solution([1,2,3], 11))
