@@ -1,4 +1,5 @@
-def solution(priorities, location):
+from collections import deque
+def legacySolution(priorities, location):
     chkVal = [0, -1]
     nowVal = priorities[location]
     higherNum = 0
@@ -44,5 +45,24 @@ def solution(priorities, location):
                     sameCnt +=1
             return sameCnt + higherNum
     return 1
+def solution(priorities, location):
+    priorities = deque(priorities)
+    nowLoc = deque([i for i in range(len(priorities))])
+    cnt = 0
+    while priorities :
+        maxVal = max(priorities)
+        for i in range(len(priorities)):
+            nowNum = priorities.popleft()
+            nowLo = nowLoc.popleft()
+            print(nowNum, nowLo)
+            if maxVal != nowNum :
+                priorities.append(nowNum)
+                nowLoc.append(nowLo)
+            else :
+                cnt += 1
+                if location == nowLo :
+                    return cnt
+                maxVal = max(priorities)
+    return cnt
 
-print(solution([1, 1, 9, 1, 1, 1], 0))
+print(solution([1, 1, 9, 1, 9, 1], 3))
